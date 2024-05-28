@@ -1,0 +1,9 @@
+name: autorift
+channels:
+ - conda-forge
+dependencies:
+ - python
+ - gdal
+ - opencv
+ - scikit-image
+ - scipy
