@@ -22,15 +22,17 @@ for line in bldInfo:
 
 print('Open CV path: ', path)
 
-
+# Fix to install into existing Conda Environment
+conda_path = os.path.join(os.environ['CONDA_PREFIX'],'include/opencv4')
+print('OpenCV Conda Include:', conda_path)
 
 extensions = [
      Extension(
         name="autoRIFT/autoriftcore",
         sources= ['geo_autoRIFT/autoRIFT/bindings/autoriftcoremodule.cpp'],
-        include_dirs=[np.get_include()] + 
-                    ['geo_autoRIFT/autoRIFT/include',
-                     os.path.join(path, 'include/opencv4/')],
+        include_dirs=[np.get_include()] +
+                     [conda_path] +
+                     ['geo_autoRIFT/autoRIFT/include', os.path.join(path, 'include/opencv4/')],
         library_dirs = [os.path.join(path, 'lib')],
         libraries=['opencv_core', 'opencv_imgproc'],
         extra_compile_args=['-std=c++11'],
